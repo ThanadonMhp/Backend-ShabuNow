@@ -12,11 +12,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(UserSeeder::class);
+        $this->call(TableSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(MenuSeeder::class);
+        $this->call(OrderSeeder::class);
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'username' => 'Test',
+            'email' => 'test@example.com',
+        ]);
+        \App\Models\User::factory()->create([
+            'username' => 'Admin',
+            'email' => 'Admin@example.com',
+            'role' => 'admin'
+        ]);
+        \App\Models\User::factory()->create([
+            'username' => 'Staff',
+            'email' => 'Staff@example.com',
+            'role' => 'staff',
+        ]);
+        \App\Models\User::factory()->create([
+            'username' => 'Chef',
+            'email' => 'Chef@example.com',
+            'role' => 'chef',
+        ]);
+        \App\Models\User::factory()->create([
+            'username' => 'Customer',
+            'email' => 'Customer@example.com',
+            'role' => 'customer',
+        ]);
     }
 }

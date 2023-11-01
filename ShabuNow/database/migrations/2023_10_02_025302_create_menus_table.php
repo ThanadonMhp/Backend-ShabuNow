@@ -15,16 +15,16 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('name');
-            $table->string('category');
-            $table->string('imgPath');
+            $table->foreignIdFor(\App\Models\Category::class); //category_id(fk)
+            $table->string('imgPath')->nullable();
             $table->string('description');
-            $table->enum('status',['available']);
+            $table->enum('status',['available','outofstock']);
             $table->integer('price');
         });
     }
 
     /**
-     * Reverse the migrations.
+     * Reverse the migrations.sdfsd
      */
     public function down(): void
     {

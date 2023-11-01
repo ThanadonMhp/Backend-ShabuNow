@@ -1,15 +1,14 @@
-<script lang="ts" setup>
-
-</script>
+<script lang="ts" setup></script>
 
 <template>
-    <section>
-        <slot/>
-    </section>
+  <NavBar></NavBar>
+  <section>
+    <slot />
+  </section>
 </template>
 
 <style scoped>
 * {
-    font-family: 'Kanit', sans-serif;
+  font-family: "Kanit", sans-serif;
 }
 </style>
