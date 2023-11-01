@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\MenuController;
+use App\Http\Controllers\Api\OrderController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 
 
 /*
@@ -52,7 +56,11 @@ Route::group([
     'prefix' => 'menu'
 ], function () {
     Route::post('store', [MenuController::class, 'store']);
+    Route::get('show/{menu}', [MenuController::class, 'show']);
+    Route::get('/', [MenuController::class, 'index']);
 });
+
+
 
 Route::group([ //staff section --------------------------------------------------------------------------------------------
     'middleware' => 'api',
