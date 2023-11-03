@@ -27,6 +27,10 @@ use Illuminate\Support\Facades\Route;
 Route::controller(AuthController::class)->group(function() {
     Route::post('/login','login');
     Route::post('/register','register');
+//    Route::post('/updatePassword', [AuthController::class, 'updatePassword']);
+    // update password
+//     Route::middleware(['auth:sanctum'])->post('/updatePassword', [AuthController::class, 'updatePassword']);
+    // Route::post('/update', 'update');
 });
 
 Route::group([
@@ -80,6 +84,7 @@ Route::group([ //customer section ----------------------------------------------
     Route::get('/', [UserController::class, 'listCustomer']);
     Route::get('{user}', [UserController::class, 'show']); //show 1 User (NOT ONLY 1 STAFF)
     Route::put('{user}/update', [UserController::class, 'update']); //show 1 User (NOT ONLY 1 STAFF)
+    Route::post('{user}/updatePassword', [UserController::class, 'updatePassword']);
     Route::delete('{user}/delete', [UserController::class, 'destroy']);
     Route::post('create', [UserController::class, 'store']);
 });

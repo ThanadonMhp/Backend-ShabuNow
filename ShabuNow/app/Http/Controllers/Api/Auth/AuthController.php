@@ -14,32 +14,59 @@ use Illuminate\Validation\ValidationException;
 class AuthController extends Controller
 {
     public function login(LoginRequest $request){
-         
+
         $user = User::where('email', $request->email)->first();
-     
+
         if (! $user || ! Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
             ]);
-        }         
+        }
         return $this->makeToken($user);
     }
     public function register(RegisterRequest $request){
            $user = User::create($request->validated());
            return $this->makeToken($user);
-           
+
     }
     public function makeToken($user){
         $token =  $user->createToken('myToken')->plainTextToken;
         return AuthResource::make([
             'token' => $token,
             'user' => [
-                'name' => $user->name,
+                'id' => $user->id,
+                'username' => $user->username,
+                'firstname' => $user->firstname,
+                'surname' => $user->surname,
                 'email' => $user->email,
-                'role' => $user->role,                
+                'role' => $user->role,
+                'created_at' => $user->created_at,
             ]
             ]);
     }
+    // change password
+//    public function updatePassword(Request $request, User $user) {
+//        $request->validate([
+//            'old_password' => ['required','min:5'],
+//            'new_password' => ['required','min:5','confirmed']
+//        ]);
+//        $user->password = Hash::make($request->get('password'));
+//
+//        if (!Hash::check($request->get('old_password'), $user->password)) {
+//            return response()->json([
+//                "error" => "Incorrect old password!",
+//                "old_password" => $request->get('old_password'),
+//                "hashed password" => $user->password,
+//                ]);
+//        }
+//
+//        $user->password = Hash::make($request->get('new_password'));
+//        $user->save();
+//        $user->refresh();
+//
+//        return response()->json(["status" => "Change password successfully!"]);
+//    }
+
     public function logout(Request $request) {
         $request->user()->tokens()->delete();
         return response()->json(['message' => 'logout success'],200);
