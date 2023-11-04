@@ -22,8 +22,6 @@ return new class extends Migration
             $table->enum('role', ['admin','chef','staff','customer'])->nullable();
             $table->integer('tableNumber')->nullable();
             $table->string('imgPath')->nullable();
-            $table->string('firstname')->nullable();
-            $table->string('surname')->nullable();
             $table->integer('age')->nullable();
         });
     }
